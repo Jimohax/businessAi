@@ -268,51 +268,66 @@ conversation5 = """
 
 
 
-def sentence_finder(text,word):
-    ## You will use this in client_only functions 
-    sentences = sent_tokenize(text)
-    conversation = []
-
-    ## Hint : find sentences containing a pattern
-    for sentence in sentences:
-        if ':' in sentence:
-            conversation.append(sentence)
-    return conversation
-    
-    # return None
-
-def client_only(text): 
-    
-    ##write script to return client data only
-    ## use pattern matching with regex
-    #pattern = (customer) 
-    ## sentence_finder can help to get the conversations
-    # word = word_tokenize(text)
-    word_list =  [] ## Example of A pattern string 'joining'
-    client_only_conv = ''
-    return client_only_conv
 
 
-def sentence_finder(text, word):
+
+
+# def sentence_finder(text, word):
    
-    sentences = sent_tokenize(text)
-    # word_pattern = re.compile(r'\b{}\b'.format(word), flags=re.IGNORECASE)
-    return matched_sentences
+#     sentences = sent_tokenize(text)
+#     # word_pattern = re.compile(r'\b{}\b'.format(word), flags=re.IGNORECASE)
+#     return matched_sentences
 
-def client_only(text): 
+# def client_only(text): 
    
-    word_list =  ['visitor', 'customer', 'client'] # Example of pattern strings
-    pattern = '|'.join(word_list)
-    client_sentences = sentence_finder(text, word)
-    client_only_conv = ' '.join(client_sentences)
-    return client_only_conv
+#     word_list =  ['visitor', 'customer', 'client'] # Example of pattern strings
+#     pattern = '|'.join(word_list)
+#     client_sentences = sentence_finder(text, word)
+#     client_only_conv = ' '.join(client_sentences)
+#     return client_only_conv
 
 
 # print(client_only(conversation1))
-sentence_finder(conversation2, "Nathan Gomez")
+# sentence_finder(conversation2, "Nathan Gomez")
 # word_list = [visitor, Jana, ]
 
 
-#  word = pattern( first occurence of'joined' ":")  (jana)
+#  word = pattern( first occurence of'joined' ":")  (fernard)
 # word_list.append(word) =
 
+
+# def sentence_finder(text,word):
+#     ## You will use this in client_only functions 
+#     ## Hint : find sentences containing a pattern
+    
+#     return None
+
+# def client_only(text): 
+    
+#     ##write script to return client data only
+#     ## use pattern matching with regex 
+#     ## sentence_finder can help to get the conversations
+#     sentence_finder(text, word)
+#     word_list =  [] ## Example of A pattern string 'joined'
+#     client_only_conv = ''
+#     return client_only_conv
+    
+
+# pattern = r"(?i)\b(?<!Ms|Mr)[A-Z][a-z]+ [A-Z][a-z]+(?!\s(?:Inc|Corp)\b)"
+keywords = ['joined', 'joined the', 'joining']
+
+def extract_name(text):
+    for keyword in keywords:
+        pattern = re.compile(f'({keyword} )([A-Z][a-z]+(?: [A-Z][a-z]+)*)')
+        match = re.search(pattern, text)
+        if match:
+            return match.group(2)
+    return None
+
+# use: word_tokenize
+# sent_tokeknize
+
+print(extract_name(conversation1))
+
+
+# instruction: Create a custom function that can extract only client conversations from a given dataset. This function should be able to identify the patterns in the conversation data and exclude any instances where chatbots or customer agents were involved.
